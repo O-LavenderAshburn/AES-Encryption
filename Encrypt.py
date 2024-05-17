@@ -16,7 +16,6 @@ __iv__ = get_random_bytes(16)
 __hexkey__ = b"770A8A65DA156D24EE2A093277530142"
 
 
-
 def ECB_Encrypt(image_bytes):
     """
     AES -ECB Encryption Mode 
@@ -34,7 +33,7 @@ def ECB_Encrypt(image_bytes):
     ciphertext = ECB_cypher.encrypt(padded)
     return ciphertext
 
-#CBC Encryption
+
 def CBC_Encrypt(image_bytes):
     """
     AES -CBC Encryption Mode 
@@ -52,6 +51,7 @@ def CBC_Encrypt(image_bytes):
 
     return cyphertext
 
+
 def CFB_Encrypt(image_bytes):
     """
     AES -CFB Encryption Mode 
@@ -60,10 +60,13 @@ def CFB_Encrypt(image_bytes):
 
     @return Return image bytes as ciphertext
     """
-
+    
+    #set cipher mode
     CFB_cypher =  AES.new(__hexkey__, AES.MODE_CFB,segment_size=8,iv=__iv__)
+    #encrypt bytes
     ciphertext = CFB_cypher.encrypt(image_bytes)
     return ciphertext
+
 
 #Ask user for input
 print("Enter Path to bmp image")

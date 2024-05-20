@@ -92,15 +92,18 @@ except FileNotFoundError:
 
 # Encrypt image using ECB encryption
 cipher_text = ECB_Encrypt(image_bytes)
+# Create and save
 new_image = Image.frombytes(mode="RGB", size=image.size, data=cipher_text)
 new_image.save(fp="ECB.jpg", format="JPEG")
 
 # Encrypt image using CFB encryption
 cipher_text = CFB_Encrypt(image_bytes)
+# Create and save
 new_image = Image.frombytes(mode="RGB", size=image.size, data=cipher_text)
 new_image.save(fp="CFB.jpg", format="JPEG")
 
 # Encrypt image using CBC encryption
 cipher_text = CBC_Encrypt(image_bytes)
+# Create and save
 new_image = Image.frombytes(mode="RGB", size=image.size, data=cipher_text)
 new_image.save(fp="CBC.jpg", format="JPEG")

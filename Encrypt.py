@@ -4,9 +4,9 @@ with encrypted image bytes being the body
 """
 
 # initilization vector
-__iv__ = get_random_bytes(16)
+iv = get_random_bytes(16)
 # 128byte key
-__hexkey__ = b"770A8A65DA156D24EE2A093277530142"
+hexkey = b"770A8A65DA156D24EE2A093277530142"
 
 
 from Crypto.Cipher import AES
@@ -26,7 +26,7 @@ def ECB_Encrypt(image_bytes):
     """
 
     # set cipher mode
-    ECB_cypher = AES.new(__hexkey__, AES.MODE_ECB)
+    ECB_cypher = AES.new(hexkey, AES.MODE_ECB)
     # pad bytes
     padded = Padding.pad(image_bytes, 16)
     # encrypt
@@ -44,7 +44,7 @@ def CBC_Encrypt(image_bytes):
     """
 
     # set cipher mode
-    CFB_cypher = AES.new(__iv__, AES.MODE_CBC)
+    CFB_cypher = AES.new(iv, AES.MODE_CBC)
     # pad bytes
     ct_bytes = Padding.pad(image_bytes, 16)
     cyphertext = CFB_cypher.encrypt(ct_bytes)
@@ -62,7 +62,7 @@ def CFB_Encrypt(image_bytes):
     """
 
     # set cipher mode
-    CFB_cypher = AES.new(__hexkey__, AES.MODE_CFB, segment_size=8, iv=__iv__)
+    CFB_cypher = AES.new(hexkey, AES.MODE_CFB, segment_size=8, iv=iv)
     # encrypt bytes
     ciphertext = CFB_cypher.encrypt(image_bytes)
     return ciphertext
